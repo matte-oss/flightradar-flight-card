@@ -1,85 +1,188 @@
-# Include test entities
-input_text:
-  flight_number:
-    name: Flight Number
-    initial: 'BA123'
-
-input_number:
-  flight_altitude:
-    name: Altitude
-    min: 0
-    max: 45000
-    step: 100
-    initial: 35000
-    unit_of_measurement: ft
-
-  flight_speed:
-    name: Speed
-    min: 0
-    max: 600
-    step: 10
-    initial: 450
-    unit_of_measurement: kts
-
-  flight_heading:
-    name: Heading
-    min: 0
-    max: 360
-    step: 1
-    initial: 270
-    unit_of_measurement: '°'
-
 input_select:
-  flight_status:
-    name: Flight Status
+  payload_test_options:
+    name: Flight test options
     options:
-      - scheduled
-      - boarding
-      - departed
-      - en_route
-      - landing
-      - arrived
-      - cancelled
-      - delayed
-    initial: en_route
+      - Live
+      - Helicopter
+      - Private Owner
+      - Commercial flight
 
-# Template sensors to simulate flight data
-template:
-  - sensor:
-      - name: 'Test Flight'
-        unique_id: test_flight_sensor
-        state: "{{ states('input_select.flight_status') }}"
-        attributes:
-          friendly_name: 'Test Flight BA123'
-          flight_number: "{{ states('input_text.flight_number') }}"
-          airline: 'British Airways'
-          origin: 'London Heathrow (LHR)'
-          destination: 'New York JFK (JFK)'
-          altitude: "{{ states('input_number.flight_altitude') | int }}"
-          speed: "{{ states('input_number.flight_speed') | int }}"
-          heading: "{{ states('input_number.flight_heading') | int }}"
-          latitude: 52.3676
-          longitude: -31.2456
-          aircraft_type: 'Boeing 777-300ER'
-          registration: 'G-STBA'
+sensor:
+  - platform: template
+    sensors:
+      payload:
+        friendly_name: 'Flight payload'
+        value_template: 'ok'
+        attribute_templates:
+          flights: >
+            {% set option = states('input_select.payload_test_options') %}
 
-      - name: 'Test Flight 2'
-        unique_id: test_flight_sensor_2
-        state: 'arrived'
-        attributes:
-          friendly_name: 'Arrived Flight LH456'
-          flight_number: 'LH456'
-          airline: 'Lufthansa'
-          origin: 'Frankfurt (FRA)'
-          destination: 'London Heathrow (LHR)'
-          altitude: 0
-          speed: 0
-          heading: 90
-          aircraft_type: 'Airbus A320'
-          registration: 'D-AIZX'
+            {% if option == 'Live' %}
+              {% set payload = '{
+                  "id": "3d691146",
+                  "flight_number": "U23074",
+                  "callsign": "EZY63RX",
+                  "aircraft_registration": "G-EZDL",
+                  "aircraft_photo_small": "https://cdn.jetphotos.com/200/6/1949490_1752692718_tb.jpg?v=0",
+                  "aircraft_photo_medium": "https://cdn.jetphotos.com/400/6/1949490_1752692718.jpg?v=0",
+                  "aircraft_photo_large": "https://cdn.jetphotos.com/640cb/6/1949490_1752692718.jpg?v=0",
+                  "aircraft_model": "Airbus A319-111",
+                  "aircraft_code": "A319",
+                  "airline": "easyJet",
+                  "airline_short": "easyJet",
+                  "airline_iata": "U2",
+                  "airline_icao": "EZY",
+                  "airport_origin_name": "Marrakesh Menara Airport",
+                  "airport_origin_code_iata": "RAK",
+                  "airport_origin_code_icao": "GMMX",
+                  "airport_origin_country_name": "Morocco",
+                  "airport_origin_country_code": "MA",
+                  "airport_origin_city": "Marrakesh",
+                  "airport_origin_timezone_offset": 3600,
+                  "airport_origin_timezone_abbr": "+01",
+                  "airport_origin_terminal": "0",
+                  "airport_origin_latitude": 31.60688,
+                  "airport_origin_longitude": -8.0363,
+                  "airport_destination_name": "Belfast International Airport",
+                  "airport_destination_code_iata": "BFS",
+                  "airport_destination_code_icao": "EGAA",
+                  "airport_destination_country_name": "United Kingdom",
+                  "airport_destination_country_code": "GB",
+                  "airport_destination_city": "Belfast",
+                  "airport_destination_timezone_offset": 0,
+                  "airport_destination_timezone_abbr": "GMT",
+                  "airport_destination_terminal": null,
+                  "airport_destination_latitude": 54.657501,
+                  "airport_destination_longitude": -6.21583,
+                  "time_scheduled_departure": 1765128600,
+                  "time_scheduled_arrival": 1765142700,
+                  "time_real_departure": 1765133902,
+                  "time_real_arrival": null,
+                  "time_estimated_departure": null,
+                  "time_estimated_arrival": 1765146624,
+                  "latitude": 41.0112,
+                  "longitude": -8.4902,
+                  "altitude": 38000,
+                  "heading": 354,
+                  "ground_speed": 443,
+                  "squawk": "",
+                  "vertical_speed": -64,
+                  "distance": 3.3576730759274107,
+                  "on_ground": 0,
+                  "tracked_by_device": "FlightRadar24"
+              }' %}
+            {% elif option == 'Helicopter' %}
+              {% set payload = '{
+                  "id": "3d5e6f5a",
+                  "flight_number": null,
+                  "callsign": "OKVPL",
+                  "aircraft_registration": "OK-VPL",
+                  "aircraft_photo_small": "https://cdn.jetphotos.com/200/5/1712589_1760729474_tb.jpg?v=0",
+                  "aircraft_photo_medium": "https://cdn.jetphotos.com/400/5/1712589_1760729474.jpg?v=0",
+                  "aircraft_photo_large": "https://cdn.jetphotos.com/640cb/5/1712589_1760729474.jpg?v=0",
+                  "aircraft_model": "Cirrus SR22T",
+                  "aircraft_code": "S22T",
+                  "airline": "Private owner",
+                  "airline_short": null,
+                  "airline_iata": null,
+                  "airline_icao": null,
+                  "airport_origin_name": "Cascais Municipal Airport",
+                  "airport_origin_code_iata": "CAT",
+                  "airport_origin_code_icao": "LPCS",
+                  "airport_origin_country_name": "Portugal",
+                  "airport_origin_country_code": "PT",
+                  "airport_origin_city": "Cascais",
+                  "airport_origin_timezone_offset": 0,
+                  "airport_origin_timezone_abbr": "WET",
+                  "airport_origin_terminal": null,
+                  "airport_origin_latitude": 38.725555,
+                  "airport_origin_longitude": -9.355278,
+                  "airport_destination_name": "Vilar Da Luz Maia Airport",
+                  "airport_destination_code_iata": "QRV",
+                  "airport_destination_code_icao": "LPVL",
+                  "airport_destination_country_name": "Portugal",
+                  "airport_destination_country_code": "PT",
+                  "airport_destination_city": "Vilar Da Luz",
+                  "airport_destination_timezone_offset": 0,
+                  "airport_destination_timezone_abbr": "WET",
+                  "airport_destination_terminal": null,
+                  "airport_destination_latitude": 41.276447,
+                  "airport_destination_longitude": -8.515509,
+                  "time_scheduled_departure": 1764854700,
+                  "time_scheduled_arrival": 1764858660,
+                  "time_real_departure": 1764855078,
+                  "time_real_arrival": null,
+                  "time_estimated_departure": null,
+                  "time_estimated_arrival": 1764858792,
+                  "latitude": 40.9926,
+                  "longitude": -8.4901,
+                  "altitude": 1850,
+                  "heading": 19,
+                  "ground_speed": 173,
+                  "squawk": "",
+                  "vertical_speed": -64,
+                  "distance": 2.685781877051901,
+                  "on_ground": 0,
+                  "tracked_by_device": "FlightRadar24"
+              }' %}
+            {% elif option == 'Private Owner' %}
+              {% set payload = '{
+              }' %}
+            {% elif option == 'Commercial flight' %}
+              {% set payload = '{
+                "id": "3d690c94",
+                "flight_number": "U24776",
+                "callsign": "EJU83UT",
+                "aircraft_registration": "OE-ICT",
+                "aircraft_photo_small": "https://cdn.jetphotos.com/200/6/918441_1762857615_tb.jpg?v=0",
+                "aircraft_photo_medium": "https://cdn.jetphotos.com/400/6/918441_1762857615.jpg?v=0",
+                "aircraft_photo_large": "https://cdn.jetphotos.com/640cb/6/918441_1762857615.jpg?v=0",
+                "aircraft_model": "Airbus A320-214",
+                "aircraft_code": "A320",
+                "airline": "easyJet",
+                "airline_short": "easyJet",
+                "airline_iata": "U2",
+                "airline_icao": "EZY",
+                "airport_origin_name": "Gran Canaria Airport",
+                "airport_origin_code_iata": "LPA",
+                "airport_origin_code_icao": "GCLP",
+                "airport_origin_country_name": "Spain",
+                "airport_origin_country_code": "ES",
+                "airport_origin_city": "Gran Canaria",
+                "airport_origin_timezone_offset": 0,
+                "airport_origin_timezone_abbr": "WET",
+                "airport_origin_terminal": null,
+                "airport_origin_latitude": 27.931881,
+                "airport_origin_longitude": -15.3865,
+                "airport_destination_name": "Nantes Atlantique Airport",
+                "airport_destination_code_iata": "NTE",
+                "airport_destination_code_icao": "LFRS",
+                "airport_destination_country_name": "France",
+                "airport_destination_country_code": "FR",
+                "airport_destination_city": "Nantes",
+                "airport_destination_timezone_offset": 3600,
+                "airport_destination_timezone_abbr": "CET",
+                "airport_destination_terminal": null,
+                "airport_destination_latitude": 47.15694,
+                "airport_destination_longitude": -1.60777,
+                "time_scheduled_departure": 1765128300,
+                "time_scheduled_arrival": 1765141500,
+                "time_real_departure": 1765132777,
+                "time_real_arrival": null,
+                "time_estimated_departure": null,
+                "time_estimated_arrival": 1765144576,
+                "latitude": 41.0115,
+                "longitude": -8.5146,
+                "altitude": 38025,
+                "heading": 22,
+                "ground_speed": 456,
+                "squawk": "",
+                "vertical_speed": 128,
+                "distance": 2.1543920807281256,
+                "on_ground": 0,
+                "tracked_by_device": "FlightRadar24"
+              }' %}
+            {% endif %}
 
-      - name: 'Test Flight 3'
-        unique_id: test_flight_sensor_3
-        state: 'unavailable'
-        attributes:
-          friendly_name: 'Unavailable Flight'
+            {% set payload = payload | from_json %}
+            {{ [payload] if payload else [] }}

@@ -13,28 +13,28 @@ views:
 
           # Main test card with all options
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight
+            entity: sensor.payload
             name: 'Custom Name Test'
             show_header: true
             show_state: true
 
           # Card without custom name
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight
+            entity: sensor.payload
 
           # Card without header
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight
+            entity: sensor.payload
             show_header: false
 
           # Card without state
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight
+            entity: sensor.payload
             show_state: false
 
           # Minimal card
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight
+            entity: sensor.payload
             show_header: false
             show_state: false
 
@@ -51,17 +51,17 @@ views:
 
           # En route flight
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight
+            entity: sensor.payload
             name: 'En Route Flight'
 
           # Arrived flight
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight_2
+            entity: sensor.payload_2
             name: 'Arrived Flight'
 
           # Unavailable flight
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight_3
+            entity: sensor.payload_3
             name: 'Unavailable Flight'
 
           # Non-existent entity
@@ -90,5 +90,5 @@ views:
               - entity: input_number.flight_heading
 
           - type: custom:flightradar-flight-card
-            entity: sensor.test_flight
+            entity: sensor.payload
             name: 'Live Preview'
