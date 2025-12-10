@@ -16,7 +16,7 @@
     "update-flightradar24-integration": "bash scripts/update-flightradar24-integration.sh",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
-    "format": "prettier --write .",
+    "format": "prettier --write ./src",
     "format:check": "prettier --check src/**/*.ts",
     "release": "release-it"
   },
@@ -43,6 +43,7 @@
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.3.0",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^8.48.1",
     "@typescript-eslint/parser": "^8.48.1",
     "eslint": "^8.57.1",

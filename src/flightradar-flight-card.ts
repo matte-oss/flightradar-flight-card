@@ -1,12 +1,12 @@
-import { LitElement, html, TemplateResult } from 'lit';
+import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
-import { ChangedProps, FlightData, FlightradarFlightCardConfig, HomeAssistant } from './types';
+import { CARD_DESCRIPTION, CARD_NAME, CARD_VERSION, DEFAULT_CONFIG } from './const';
 import { cardStyles } from './styles';
-import { CARD_NAME, CARD_DESCRIPTION, CARD_VERSION, DEFAULT_CONFIG } from './const';
-import { registerCustomCard } from './utils/register-card';
-import { hasConfigOrEntityChanged } from './utils/has-changed';
+import { ChangedProps, FlightData, FlightradarFlightCardConfig, HomeAssistant } from './types';
 import { formatRelativeTime } from './utils/date';
+import { hasConfigOrEntityChanged } from './utils/has-changed';
+import { registerCustomCard } from './utils/register-card';
 
 console.info(
   `%c ${CARD_NAME.toUpperCase()} %c v${CARD_VERSION} `,

@@ -1,4 +1,5 @@
 import type { HassEntity } from 'home-assistant-js-websocket';
+
 import { ChangedProps, HomeAssistant } from '../types';
 
 export function hasConfigChanged(element: any, changedProps: ChangedProps): boolean {

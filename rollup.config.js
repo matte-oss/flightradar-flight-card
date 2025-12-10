@@ -1,9 +1,9 @@
-import typescript from '@rollup/plugin-typescript';
-import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
-import serve from 'rollup-plugin-serve';
+import typescript from '@rollup/plugin-typescript';
 import { defineConfig } from 'rollup';
+import serve from 'rollup-plugin-serve';
 
 const dev = !!process.env.ROLLUP_WATCH;
 
