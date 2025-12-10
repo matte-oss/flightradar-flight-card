@@ -370,7 +370,8 @@ export class FlightradarFlightCard extends LitElement {
                   this._flight.airlineIcao
                     ? html`
                         <img
-                          src="/local/flightaware_logos/${this._flight.airlineIcao}.png"
+                          src="http://localhost:4000/flightaware_logos/${this._flight
+                            .airlineIcao}.png"
                           style="
                   max-width:70px;
                   max-height: 20px;

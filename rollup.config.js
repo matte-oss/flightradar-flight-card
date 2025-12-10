@@ -34,7 +34,7 @@ const plugins = [
 if (dev) {
   plugins.push(
     serve({
-      contentBase: ['./dist'],
+      contentBase: ['./dist', './public'],
       host: '0.0.0.0',
       port: 4000,
       allowCrossOrigin: true,
