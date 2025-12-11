@@ -35,7 +35,8 @@
   },
   "dependencies": {
     "home-assistant-js-websocket": "^9.6.0",
-    "lit": "^3.2.1"
+    "lit": "^3.2.1",
+    "valibot": "^1.2.0"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^9.0.3",

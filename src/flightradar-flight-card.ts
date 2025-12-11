@@ -1,12 +1,14 @@
 import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import * as v from 'valibot';
 
 import { CARD_DESCRIPTION, CARD_NAME, CARD_VERSION, CardConfig, DEFAULT_CONFIG } from './const';
 import { cardStyles } from './styles';
-import { ChangedProps, FlightData, HomeAssistant } from './types';
+import { ChangedProps, HomeAssistant } from './types';
 import { formatRelativeTime } from './utils/date';
 import { hasConfigOrEntityChanged } from './utils/has-changed';
 import { registerCustomCard } from './utils/register-card';
+import { areaFlightSchema } from './utils/schemas';
 
 console.info(
   `%c ${CARD_NAME.toUpperCase()} %c v${CARD_VERSION} `,
@@ -83,8 +85,8 @@ export class FlightradarFlightCard extends LitElement {
       throw new Error(`Entity not found: ${entityId}`);
     }
 
-    const attributes = stateObj.attributes;
-    const f: FlightData = attributes.flights[0];
+    const data = stateObj.attributes.flights[0];
+    const f = v.parse(areaFlightSchema, data);
 
     this._flight = {
       id: f.id,
@@ -100,7 +102,7 @@ export class FlightradarFlightCard extends LitElement {
       aircraftModel: f.aircraft_model,
       origin: f.airport_origin_city || 'Desconhecido',
       destination: f.airport_destination_city || 'Desconhecido',
-      distance: f.distance,
+      distance: f.closest_distance ?? f.distance,
       altitude: f.altitude,
       groundSpeed: f.ground_speed,
       departureTime: f.time_real_departure,
