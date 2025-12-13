@@ -1,4 +1,4 @@
-import { LitElement, TemplateResult, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import * as v from 'valibot';
 
@@ -133,7 +133,7 @@ export class FlightradarFlightCard extends LitElement {
     };
   }
 
-  protected renderFlightTitle(): TemplateResult {
+  protected renderFlightTitle() {
     if (!this._flight.flightNumber) {
       return html`<p>${this._flight.callsign}</p>`;
     }
@@ -162,8 +162,8 @@ export class FlightradarFlightCard extends LitElement {
     `;
   }
 
-  protected renderFlightProgress(): TemplateResult {
-    if (!this._flight.isLive || !this._flight.arrivalTime) return html``;
+  protected renderFlightProgress() {
+    if (!this._flight.isLive || !this._flight.arrivalTime) return nothing;
 
     const relativeTime = formatRelativeTime(
       new Date(),
@@ -180,9 +180,9 @@ export class FlightradarFlightCard extends LitElement {
     </div>`;
   }
 
-  protected render(): TemplateResult {
+  protected render() {
     if (!this._config || !this.hass) {
-      return html``;
+      return nothing;
     }
 
     return html`
@@ -237,14 +237,14 @@ export class FlightradarFlightCard extends LitElement {
                           .airlineIcao}.png"
                       />
                     `
-                  : ''}
+                  : nothing}
 
                 <p>${this._flight.airlineLabel}</p>
               </div>
 
               ${this._flight.aircraftPhoto
                 ? html` <img src="${this._flight.aircraftPhoto}" class="aircraft-photo" /> `
-                : ''}
+                : nothing}
 
               <p class="aircraft-model">${this._flight.aircraftModel}</p>
             </div>
