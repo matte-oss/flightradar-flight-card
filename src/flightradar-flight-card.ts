@@ -6,6 +6,7 @@ import { CARD_DESCRIPTION, CARD_NAME, CARD_VERSION, CardConfig, DEFAULT_CONFIG }
 import './flight-progress-bar';
 import { cardStyles } from './styles';
 import { ChangedProps, HomeAssistant } from './types';
+import { isValidAirlineLogo } from './utils/airline-logos';
 import { hasConfigOrEntityChanged } from './utils/has-changed';
 import { registerCustomCard } from './utils/register-card';
 import { areaFlightSchema } from './utils/schemas';
@@ -43,11 +44,16 @@ export class FlightradarFlightCard extends LitElement {
     origin: string;
     /** Destination airport */
     destination: string;
-    /** Distance to tracked area in kilometers */
+    /** Distance to tracked area
+     * @unit kilometers
+     */
     distance: number;
-    /** Altitude in feet */
+    /** Barometric pressure altitude above mean sea level (AMSL)
+     * @unit feet
+     */
     altitude: number;
-    /** Ground speed in knots */
+    /** Speed relative to the ground
+     * @unit knots */
     groundSpeed: number;
     /** Whether the flight is currently in the air */
     isLive: boolean;
@@ -220,7 +226,7 @@ export class FlightradarFlightCard extends LitElement {
 
             <div class="main-content-right">
               <div class="airline-container">
-                ${this._flight.airlineIcao
+                ${isValidAirlineLogo(this._flight.airlineIcao)
                   ? html`
                       <img
                         src="http://localhost:4000/flightaware_logos/${this._flight
