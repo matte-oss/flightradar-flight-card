@@ -4,7 +4,7 @@ import * as v from 'valibot';
 
 import { CARD_NAME, CardConfig, DEFAULT_CONFIG } from './const';
 import { cardStyles } from './styles';
-import { ChangedProps, HomeAssistant } from './types';
+import { ChangedProps, HomeAssistant } from './types/homeassistant';
 import { isValidAirlineLogo } from './utils/airline-logos';
 import { hasConfigOrEntityChanged } from './utils/has-changed';
 import { areaFlightSchema } from './utils/schemas';

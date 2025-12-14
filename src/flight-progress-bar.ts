@@ -1,7 +1,7 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
-import { HomeAssistant } from './types';
+import { HomeAssistant } from './types/homeassistant';
 import { formatRelativeTime } from './utils/date';
 
 @customElement('flight-progress-bar')
