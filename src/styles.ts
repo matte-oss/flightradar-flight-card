@@ -138,34 +138,7 @@ export const cardStyles = css`
     text-transform: uppercase;
   }
 
-  .flight-progress .progress-bar {
-    position: relative;
+  .flight-progress {
     margin-top: var(--ha-space-4);
-    background: var(--state-active-color);
-    background: linear-gradient(
-      90deg,
-      var(--state-active-color) 0%,
-      var(--state-active-color) calc(var(--progress-percent) * 1%),
-      var(--secondary-background-color) calc(var(--progress-percent) * 1%),
-      var(--secondary-background-color) 100%
-    );
-    height: 4px;
-    border-radius: 999px;
-  }
-
-  .flight-progress .progress-bar > ha-icon {
-    position: absolute;
-    top: 0px;
-    left: calc(var(--progress-percent) * 1%);
-    transform: translate(-50%, -50%);
-    --mdc-icon-size: var(--ha-space-4);
-    background: var(--card-background-color, #fff);
-    color: var(--accent-color);
-  }
-
-  .flight-progress .progress-text {
-    margin-top: 6px;
-    text-align: right;
-    opacity: 0.6;
   }
 `;

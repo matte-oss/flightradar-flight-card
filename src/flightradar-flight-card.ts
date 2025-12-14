@@ -3,9 +3,9 @@ import { customElement, property, state } from 'lit/decorators.js';
 import * as v from 'valibot';
 
 import { CARD_DESCRIPTION, CARD_NAME, CARD_VERSION, CardConfig, DEFAULT_CONFIG } from './const';
+import './flight-progress-bar';
 import { cardStyles } from './styles';
 import { ChangedProps, HomeAssistant } from './types';
-import { formatRelativeTime } from './utils/date';
 import { hasConfigOrEntityChanged } from './utils/has-changed';
 import { registerCustomCard } from './utils/register-card';
 import { areaFlightSchema } from './utils/schemas';
@@ -162,24 +162,6 @@ export class FlightradarFlightCard extends LitElement {
     `;
   }
 
-  protected renderFlightProgress() {
-    if (!this._flight.isLive || !this._flight.arrivalTime) return nothing;
-
-    const relativeTime = formatRelativeTime(
-      new Date(),
-      new Date(this._flight.arrivalTime),
-      this.hass.language
-    );
-
-    return html` <div class="flight-progress">
-      <div class="progress-bar" style="--progress-percent: ${70};">
-        <ha-icon icon="mdi:airplane" />
-      </div>
-
-      <p class="progress-text">Restam ${relativeTime} para chegar a ${this._flight.destination}</p>
-    </div>`;
-  }
-
   protected render() {
     if (!this._config || !this.hass) {
       return nothing;
@@ -206,7 +188,7 @@ export class FlightradarFlightCard extends LitElement {
                         <div class="pulse"></div>
                       </div>
                     `
-                  : ''}
+                  : nothing}
               </div>
 
               <div class="flight-locations">
@@ -250,15 +232,18 @@ export class FlightradarFlightCard extends LitElement {
             </div>
           </div>
 
-          ${this.renderFlightProgress()}
+          ${this._flight.isLive && this._flight.arrivalTime
+            ? html` <div class="flight-progress">
+                <flight-progress-bar
+                  .hass=${this.hass}
+                  .departureTime=${this._flight.departureTime}
+                  .arrivalTime=${this._flight.arrivalTime}
+                  .destination=${this._flight.destination}
+                />
+              </div>`
+            : nothing}
         </div>
       </ha-card>
     `;
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    [CARD_NAME]: FlightradarFlightCard;
   }
 }
