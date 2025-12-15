@@ -22,6 +22,7 @@ export class FlightradarFlightCard extends LitElement {
     id: string;
     aircraftRegistration: string | null;
     aircraftPhoto: string | null;
+    aircraftCode: string;
     aircraftModel: string;
     airlineIcao: string | null;
     flightNumber: string | null;
@@ -110,6 +111,7 @@ export class FlightradarFlightCard extends LitElement {
       },
       aircraftRegistration: f.aircraft_registration,
       aircraftPhoto: f.aircraft_photo_small,
+      aircraftCode: f.aircraft_code,
       aircraftModel: f.aircraft_model,
       origin: f.airport_origin_city || 'Desconhecido',
       destination: f.airport_destination_city || 'Desconhecido',
@@ -134,10 +136,10 @@ export class FlightradarFlightCard extends LitElement {
   protected renderFlightTitle() {
     if (
       !this._flight.flightNumber &&
-      !this._flight.callsign &&
+      (!this._flight.callsign || this._flight.callsign === 'Blocked') &&
       !this._flight.aircraftRegistration
     ) {
-      return html`<p>${this._flight.aircraftModel}</p>`;
+      return html`<p>${this._flight.aircraftCode}</p>`;
     }
 
     const url = new URL(`https://www.flightradar24.com`);
@@ -152,6 +154,8 @@ export class FlightradarFlightCard extends LitElement {
 
       if (this._flight.callsign) {
         urlPath.unshift(this._flight.callsign);
+      } else if (this._flight.aircraftCode) {
+        urlPath.unshift(this._flight.aircraftCode);
       }
 
       url.pathname = `/${urlPath.join('/')}`;
