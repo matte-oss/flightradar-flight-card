@@ -18,8 +18,6 @@ export class FlightradarFlightCard extends LitElement {
   @state()
   private _config!: CardConfig;
 
-  private _invalid!: boolean;
-
   static styles = [resetStyles, cardStyles];
 
   public setConfig(config: Partial<CardConfig>): void {
@@ -47,8 +45,6 @@ export class FlightradarFlightCard extends LitElement {
   }
 
   protected render() {
-    this._invalid = false;
-
     const entityId = this._config.entity;
     const stateObj = this.hass.states[entityId];
 
@@ -68,9 +64,8 @@ export class FlightradarFlightCard extends LitElement {
       ),
       data
     );
-    console.log(f);
 
-    if (!this._config || !this.hass || this._invalid) {
+    if (!this._config || !this.hass) {
       return html`<hui-error-card>Something went wrong: check console for errors</hui-error-card>`;
     }
 
