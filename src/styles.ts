@@ -41,7 +41,7 @@ export const cardStyles = css`
     margin-top: 12px;
     font-size: 26px;
     line-height: 1.15;
-    font-weight: 600;
+    font-weight: var(--ha-font-weight-bold, 600);
     color: var(--primary-text-color);
   }
 
@@ -61,7 +61,7 @@ export const cardStyles = css`
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 10px;
+    font-size: var(--ha-font-size-xs, 10px);
     padding: 2px 6px;
     color: white;
     background: var(--state-active-color);
@@ -90,15 +90,15 @@ export const cardStyles = css`
   }
 
   .flight-speed-info-container .label {
-    font-size: var(--ha-font-size-xs);
+    font-size: var(--ha-font-size-xs, 10px);
     opacity: 0.6;
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
 
   .flight-speed-info-container .value {
-    font-size: var(--ha-font-size-xl);
-    font-weight: 600;
+    font-size: var(--ha-font-size-xl, 20px);
+    font-weight: var(--ha-font-weight-bold, 600);
   }
 
   .main-content-right {
@@ -126,9 +126,9 @@ export const cardStyles = css`
   }
 
   .main-content-right .airline-container p {
-    font-size: 12px;
+    font-size: var(--ha-font-size-s);
+    line-height: var(--ha-line-height-condensed, 1.2);
     opacity: 0.7;
-    text-transform: uppercase;
   }
 
   .main-content-right .aircraft-photo {
@@ -140,9 +140,9 @@ export const cardStyles = css`
   }
 
   .main-content-right .aircraft-model {
-    font-size: 12px;
+    font-size: var(--ha-font-size-s);
+    line-height: var(--ha-line-height-condensed, 1.2);
     opacity: 0.7;
-    text-transform: uppercase;
   }
 
   .flight-progress {
