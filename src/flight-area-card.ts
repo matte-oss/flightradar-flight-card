@@ -127,7 +127,7 @@ export class FlightradarFlightCard extends LitElement {
                     ${this.flight.destination ?? this.t('destination_unknown')}
                   </div>`
                 : nothing}
-              ${!!flightInfos.length
+              ${flightInfos.length
                 ? html`
                     <div class="flight-speed-info-container">
                       ${flightInfos.map(
