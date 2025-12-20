@@ -16,4 +16,5 @@ registerCustomCard({
   name: 'Flightradar Flight Card',
   description: CARD_DESCRIPTION,
   documentationURL: GITHUB_REPOSITORY_URL,
+  preview: true,
 });
