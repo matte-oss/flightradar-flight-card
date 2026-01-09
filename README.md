@@ -2,8 +2,9 @@
 
 A custom Home Assistant card for displaying Flightradar flight information.
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
 [![GitHub Release](https://img.shields.io/github/release/plckr/flightradar-flight-card.svg)](https://github.com/plckr/flightradar-flight-card/releases)
+[![Community Forum](https://img.shields.io/static/v1.svg?label=Community&message=Forum&color=41bdf5&logo=HomeAssistant&logoColor=white)](https://community.home-assistant.io/t/flightradar24-flight-card/972609)
+[![HACS](https://img.shields.io/badge/HACS-Default-orange.svg?logo=HomeAssistantCommunityStore&logoColor=white)](https://github.com/hacs/integration)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/plckr/flightradar-flight-card/refs/heads/main/card-examples/area-card-dark.png">
